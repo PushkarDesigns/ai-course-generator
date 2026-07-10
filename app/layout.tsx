@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ClerkProvider } from "@clerk/nextjs";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -28,11 +29,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={AppFont.className}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
-    </html>
+    <>
+      <ClerkProvider>
+        <html lang="en" className={AppFont.className}>
+          <body className="min-h-full flex flex-col">{children}</body>
+        </html>
+      </ClerkProvider>
+    </>
   );
 }
