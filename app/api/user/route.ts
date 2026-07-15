@@ -17,13 +17,12 @@ export async function POST(req: NextRequest) {
 
   // if not create a new user in DB
   if (users?.length == 0) {
-    const newUser = await db
-      .insert(usersTable)
-      .values({
+    const newUser = await db.insert(usersTable).values({
         email: user?.primaryEmailAddress?.emailAddress as string,
         name: user?.fullName as string,
       }).returning();
 
     return NextResponse.json(newUser[0]);
   }
+  return NextResponse.json(users[0]);
 }
